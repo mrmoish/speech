@@ -48,7 +48,6 @@ recognition.onresult = (event) => {
             main.lastElementChild.firstElementChild.innerHTML = text;
 
             translateText(text, main.lastElementChild.lastElementChild)
-            sent(text, main.lastElementChild.lastElementChild.textContent)
 
             // Добавляем в конец body
             main.insertAdjacentHTML('beforeend', htmlContent);
@@ -93,7 +92,11 @@ async function translateText(text, html) {
         }
 
         const data = await response.json();
-        html.innerHTML =  data.translations[0].text;
+
+        const textTrans = data.translations[0].text
+        html.innerHTML = textTrans;
+
+        sent(text, textTrans)
     } catch (error) {
         alert('Ошибка:', error);
         html.innerHTML = 'Ошибка перевода';
