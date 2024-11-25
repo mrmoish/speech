@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- кодировку UTF-8 поддерживает символы практически всех языков мира -->
+    <meta charset="UTF-8">
+    <!-- width=device-width - ширина страницы равна физической ширине экрана(без эмитации)
+            Мбильные устройства эмитирует более широкий экран (980px)
+            и чтобы она уместилась автоматически уменьшают масштаб страницы.
+            Из-за этого элементы на странице слишком маленькими.
+        initial-scale=1.0 
+            (?)гарантирует, что масштаб страницы будет 100% (не будет масштабирования по умолчанию),
+            так что страница не будет выглядеть уменьшенной или увеличенной.
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESPAÑOL</title>
+
+    <style>
+        body {
+            font-family: Tahoma, sans-serif;
+            text-align: center;
+        }
+
+
+
+    
+        div > :last-child{
+            color: #aaa;
+        }
+   
+    </style>
+
+    <script src="speech.js" defer></script>
+
+</head>
+<body>
+<!-- 
+    <button id="stopButton">Остановить</button> -->
+    <div>
+        <p></p>
+        <p></p>
+    </div>
+</body>
+</html>
