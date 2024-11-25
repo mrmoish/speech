@@ -47,7 +47,7 @@ recognition.onresult = (event) => {
         if (event.results[i].isFinal) {
             main.lastElementChild.firstElementChild.innerHTML = text;
 
-            // translateText(text, main.lastElementChild.lastElementChild)
+            translateText(text, main.lastElementChild.lastElementChild)
             sent(text, main.lastElementChild.lastElementChild.textContent)
 
             // Добавляем в конец body
@@ -60,7 +60,7 @@ recognition.onresult = (event) => {
 
 
         
-        window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+        // window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
     }
 };
 
