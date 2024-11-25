@@ -47,16 +47,16 @@ recognition.onresult = (event) => {
 
 
         const now = Date.now() 
-        if (now - lastCallTime >= 10000) { // Проверяем, прошло ли 5 секунд
+        // if (now - lastCallTime >= 000) { // Проверяем, прошло ли 5 секунд
             lastCallTime = now
         
             translateText(text, main.lastElementChild.lastElementChild)
-        }
-        else if(main.lastElementChild.lastElementChild.innerHTML === ''){
+        // }
+        // else if(main.lastElementChild.lastElementChild.innerHTML === ''){
 
-            main.lastElementChild.lastElementChild.innerHTML = "⏳"
+        //     main.lastElementChild.lastElementChild.innerHTML = "⏳"
             
-        }
+        // }
 
         if (event.results[i].isFinal) {
             main.lastElementChild.firstElementChild.innerHTML = text;
