@@ -13,7 +13,7 @@ recognition.lang = 'es-AR'; // Устанавливаем языка и реги
 
 // на моем устройстве дублирутеся ответ
 // более сложный ответ
-recognition.continuous = true; // Непрерывное распознавание не работает на моб. устройствах 
+// recognition.continuous = true; // Непрерывное распознавание не работает на моб. устройствах 
 
 console.log('start')
 recognition.start()
@@ -47,7 +47,7 @@ recognition.onresult = (event) => {
         if (event.results[i].isFinal) {
             main.lastElementChild.firstElementChild.innerHTML = text;
 
-            // translateText(text, main.lastElementChild.lastElementChild)
+            translateText(text, main.lastElementChild.lastElementChild)
             sent(text, main.lastElementChild.lastElementChild.textContent)
 
             // Добавляем в конец body
