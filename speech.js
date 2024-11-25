@@ -34,29 +34,41 @@ const htmlContent = `
     </div>
 `;
 
+
+let lastCallTime = Date.now() 
 recognition.onresult = (event) => {
 
     for (let i = event.resultIndex; i < event.results.length; i++) {
 
+        // event.results.length + " " + event.results[i].length + " " + 
+        const text = event.results[i][0].transcript 
 
-        const text = event.results.length + " " + event.results[i].length + " " + event.results[i][0].transcript 
+        const main = document.body.firstElementChild
 
 
+        const now = Date.now() 
+        if (now - lastCallTime >= 10000) { // Проверяем, прошло ли 5 секунд
+            lastCallTime = now
+        
+            translateText(text, main.lastElementChild.lastElementChild)
+        }
+        else if(main.lastElementChild.lastElementChild.innerHTML === ''){
+
+            main.lastElementChild.lastElementChild.innerHTML = "⏳"
+            
+        }
 
         if (event.results[i].isFinal) {
-            document.body.lastElementChild.firstElementChild.innerHTML = text;
+            main.lastElementChild.firstElementChild.innerHTML = text;
 
-            sent(text, document.body.lastElementChild.lastElementChild.textContent)
+            sent(text, main.lastElementChild.lastElementChild.textContent)
 
             // Добавляем в конец body
-            document.body.insertAdjacentHTML('beforeend', htmlContent);
+            main.insertAdjacentHTML('beforeend', htmlContent);
         }
         else{
-            document.body.lastElementChild.firstElementChild.innerHTML = text;
+            main.lastElementChild.firstElementChild.innerHTML = text;
         }
-
-
-        translateText(text, document.body.lastElementChild.lastElementChild)
     }
 };
 
