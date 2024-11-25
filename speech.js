@@ -30,12 +30,10 @@ recognition.onend = () => {
 const htmlContent = `
     <div>
         <p></p>
-        <p></p>
+        <p>...</p>
     </div>
 `;
 
-
-let lastCallTime = Date.now() 
 recognition.onresult = (event) => {
 
     for (let i = event.resultIndex; i < event.results.length; i++) {
@@ -46,25 +44,16 @@ recognition.onresult = (event) => {
         const main = document.body.firstElementChild
 
 
-        const now = Date.now() 
-        if (now - lastCallTime >= 7000) { // Проверяем, прошло ли 5 секунд
-            lastCallTime = now
-        
-            translateText(text, main.lastElementChild.lastElementChild)
-        }
-        else if(main.lastElementChild.lastElementChild.innerHTML === ''){
-
-            main.lastElementChild.lastElementChild.innerHTML = "⏳"
-            
-        }
-
         if (event.results[i].isFinal) {
             main.lastElementChild.firstElementChild.innerHTML = text;
 
+            // translateText(text, main.lastElementChild.lastElementChild)
             sent(text, main.lastElementChild.lastElementChild.textContent)
 
             // Добавляем в конец body
             main.insertAdjacentHTML('beforeend', htmlContent);
+
+            window.onload = document.body.scrollHeight;
         }
         else{
             main.lastElementChild.firstElementChild.innerHTML = text;
