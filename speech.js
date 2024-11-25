@@ -53,11 +53,14 @@ recognition.onresult = (event) => {
             // Добавляем в конец body
             main.insertAdjacentHTML('beforeend', htmlContent);
 
-            window.onload = document.body.scrollHeight;
         }
         else{
             main.lastElementChild.firstElementChild.innerHTML = text;
         }
+
+
+        
+        window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
     }
 };
 
