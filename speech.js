@@ -14,7 +14,7 @@ recognition.lang = 'es-AR'; // Устанавливаем языка и реги
 // на моем устройстве дублирутеся ответ
 // более сложный ответ
 // recognition.continuous = true; // Непрерывное распознавание не работает на моб. устройствах 
-
+// recognition.maxAlternatives = 3
 console.log('start')
 recognition.start()
 
@@ -41,7 +41,7 @@ recognition.onresult = (event) => {
         // event.results.length + " " + event.results[i].length + " " + 
         const text = event.results[i][0].transcript 
 
-        const main = document.body.firstElementChild
+        const main =  document.body.firstElementChild
 
 
         if (event.results[i].isFinal) {
