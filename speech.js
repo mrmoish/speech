@@ -9,7 +9,8 @@ if (!('webkitSpeechRecognition' in window)) {
 
 const recognition = new webkitSpeechRecognition(); //  объект распознавания речи
 recognition.interimResults = true; // промежуточные результаты распознования
-recognition.lang = 'es-AR'; // Устанавливаем языка и региона
+//recognition.lang = 'es-AR'; // Устанавливаем языка и региона
+recognition.lang = 'ru-RU'; // Устанавливаем языка и региона
 
 // на моем устройстве дублирутеся ответ
 // более сложный ответ
@@ -47,7 +48,7 @@ recognition.onresult = (event) => {
         if (event.results[i].isFinal) {
             main.lastElementChild.firstElementChild.innerHTML = text;
 
-            translateText(text, main.lastElementChild.lastElementChild)
+            // translateText(text, main.lastElementChild.lastElementChild)
 
             // Добавляем в конец body
             main.insertAdjacentHTML('beforeend', htmlContent);
@@ -76,8 +77,12 @@ async function translateText(text, html) {
     const params = new URLSearchParams();
     params.append('auth_key', apiKey);
     params.append('text', text);
-    params.append('source_lang', 'es');
-    params.append('target_lang', 'ru');
+    // params.append('source_lang', 'es');
+    // params.append('target_lang', 'ru');
+
+
+    params.append('source_lang', 'ru');
+    params.append('target_lang', 'en');
 
 
     try {
