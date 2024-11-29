@@ -9,8 +9,8 @@ if (!('webkitSpeechRecognition' in window)) {
 
 const recognition = new webkitSpeechRecognition(); //  объект распознавания речи
 recognition.interimResults = true; // промежуточные результаты распознования
-recognition.lang = 'es-AR'; // Устанавливаем языка и региона
-// recognition.lang = 'ru-RU'; // Устанавливаем языка и региона
+// recognition.lang = 'es-AR'; // Устанавливаем языка и региона
+recognition.lang = 'ru-RU'; // Устанавливаем языка и региона
 
 // на моем устройстве дублирутеся ответ
 // более сложный ответ
@@ -63,12 +63,12 @@ async function translateText(text, htmlObj) {
     const params = new URLSearchParams();
     params.append('auth_key', apiKey);
     params.append('text', text);
-    params.append('source_lang', 'es');
-    params.append('target_lang', 'ru');
+    // params.append('source_lang', 'es');
+    // params.append('target_lang', 'ru');
 
 
-    // params.append('source_lang', 'ru');
-    // params.append('target_lang', 'en');
+    params.append('source_lang', 'ru');
+    params.append('target_lang', 'en');
 
 
     try {
@@ -89,7 +89,7 @@ async function translateText(text, htmlObj) {
         
         htmlObj.setAttribute('data-overlay', textTrans)
 
-        sent(text, textTrans)
+        // sent(text, textTrans)
     } catch (error) {
         alert('Ошибка:', error);
         // html.innerHTML = 'Ошибка перевода';

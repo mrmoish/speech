@@ -68,7 +68,6 @@
         // если не тег p
         if (range.startContainer.parentElement.tagName !== "P") 
             return;
-        
 
         const text = range.startContainer.textContent; // Текст узла
         const offset = range.startOffset; // Индекс буквы в тексте
@@ -133,7 +132,7 @@
         // TODO: баг перескакивает через strong
         // TODO: что бы можно было выделить strong повтроно с большим контекстом
         startFirst = undefined
-        startLast = undefined
+        // startLast = undefined
     })
    </script>
 
