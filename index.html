@@ -17,24 +17,145 @@
     <style>
         body {
             font-family: Tahoma, sans-serif;
-            text-align: center;
+            text-align: justify;
+            margin: 2em;
+            line-height: 3em;
         }
+        span{
+            color: #ccc;
+        }
+
+        strong{
+            position: relative;
+            display:inline-block;
+        }
+        strong::before {
+            content: attr(data-overlay);
+            position: absolute;
+            bottom: 50%;
+            color: #ccc; 
+            white-space: nowrap;
+
+    left: 0;
+            /* content: attr(data-overlay);
+    position: absolute;
+
+    display:inline-block;
+    bottom: 100%;
+    left: 0;
     
-        div > :last-child{
-            color: #aaa;
+    
+    font-size: 0.8em;
+    color: #666;
+    
+    
+    padding: 2px 6px;
+    background-color: rgba(240, 240, 240, 0.9);
+    border-radius: 4px; */
+
         }
    
     </style>
 
-    <script src="speech.js" defer></script>
+    <!-- одтелный файл так как запускается долже полсе загрузки страницы -->
+    <script  src="speech.js" defer></script>
+
+    <script>
+
+    const selection = window.getSelection();
+    let firstI, lastI
+
+    let startFirst, startLast
+    document.addEventListener('touchmove', function(event) {
+        // Получаем координаты касания первого палецв
+        const x = event.touches[0].clientX;
+        const y = event.touches[0].clientY;
+
+
+    
+        // Находим текстовый узел под пальцем
+        // 🔴 эксперменталная фукнция (не стандарт)
+        // рабатей в хроме и сафаре
+        // не рабоатет в фаирфокс
+        const range = document.caretRangeFromPoint(x, y);
+
+
+        // если не тег p
+        if (range.startContainer.parentElement.tagName !== "P") 
+            return;
+        
+
+        const text = range.startContainer.textContent; // Текст узла
+        const offset = range.startOffset; // Индекс буквы в тексте
+
+        // индокс ближайшего пробела слево от нажатия
+        const preStart = text.lastIndexOf(' ', offset); 
+        // если пробел
+        // range.collapsed
+        if(preStart === offset) return // если пробел
+        let start = preStart+1
+
+        
+
+        if(start === firstI) return // если тоже слово
+
+        // Индекс последней буквы слова или -1 если нет
+        const preEnd = text.indexOf(' ', offset);
+        // если -1 один то конец это конче строки
+        let end = preEnd !== -1 ?  preEnd : text.length;
+
+
+        
+
+        if(startFirst < start)// когда выделятся текст в направления конца 
+            start = startFirst
+        else if(start < startFirst) // когда выделятся текст в направления начала 
+            end = startLast
+        else if(!startFirst){ // первый раз
+            startFirst = start
+            startLast = end
+        } 
+        else return
+        
+
+
+        range.setStart(range.startContainer, start)
+        range.setEnd(range.startContainer, end)
+       
+        selection.removeAllRanges(); // Очищаем текущие выделения
+        selection.addRange(range); // Добавляем диапазон
+
+    });
+
+    document.addEventListener('touchend', function(event){
+        const words = selection.getRangeAt(0).toString()
+        const countWords = words.split(' ').length
+
+        // TODO: Если есть .!? в середине то не выполнять 
+        if (2 <= countWords && countWords <= 4){
+
+            const strong = document.createElement('strong')
+
+            selection.getRangeAt(0).surroundContents(strong)
+
+            
+            translateText(words, strong)
+        }
+
+       
+        selection.removeAllRanges(); // Очищаем текущие выделения
+
+        // TODO: баг перескакивает через strong
+        // TODO: что бы можно было выделить strong повтроно с большим контекстом
+        startFirst = undefined
+        // startLast = undefined
+    })
+   </script>
 
 </head>
 <body>
-    <main>
-        <div>
-            <p></p>
-            <p>...</p>
-        </div>
-    </main>
+    <p>
+        <span id='process' ></span>
+    </p>
 </body>
 </html>
