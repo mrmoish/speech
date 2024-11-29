@@ -68,7 +68,7 @@ async function translateText(text, htmlObj) {
 
 
     params.append('source_lang', 'ru');
-    params.append('target_lang', 'en');
+    params.append('target_lang', 'es');
 
 
     try {
